@@ -1,0 +1,25 @@
+spring:
+
+  application:
+    name: Ecom-ApiGateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: product_route
+          uri: lb://Product-Service
+          predicates:
+            - Path=/products/*
+
+        - id: user_route
+          uri: lb://User-Service
+          predicates:
+            - Path=/users/*
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
